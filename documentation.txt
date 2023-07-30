@@ -1,0 +1,187 @@
+++++++++++++++++++++++++++++++++++++++ Rental Management Software +++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------- Tech Stack ----------------------------------------------------------
+Front End :
+
+Mobile App UI : React Netive
+
+Backend : Node Js
+
+Database : MySQL
+
+------------------------------------------ Tables ----------------------------------------------------------
+
+1.	customer_deatils =>
+
+		[id, customer_id, f_name, m_name, l_name, full_name, mobile_no, alternate_mobile_no, email_id, gender, date_of_birth, address, city, state, country, blood_group, profession, membership_type_id, room_or_flat_id, bed_id, manager_id, aadhar_no, pan_no, voter_id, identity_document_path ,date_of_joining, rent_pay_plan_date, date_of_leaving, added_on, added_by, updated_on, updated_by, deleted, status]
+
+2.	user_deatils =>
+
+		[id, user_id, user_name, user_type, mobile_no, alternate_mobile_no, email_id, password, gender, address, city, state, country, added_on, added_by, updated_on, updated_by, deleted, status]
+
+3.	property_details =>
+
+		[id, propery_id, name, address, city, state, country, pincode, property_owner_name, property_owner_mobile_no, property_owner_alternate_mobile_no, property_owner_email, added_on, added_by, updated_on, updated_by, deleted, status]
+
+4.	rooms_or_flats =>
+
+		[id, room_or_flat_no, added_on, added_by, updated_on, updated_by, deleted, status]
+
+5.	beds_details =>
+
+		[id, bed_no, added_on, added_by, updated_on, updated_by, deleted, status]
+
+6.	rent_details =>
+
+		[id, rent_no, rent_amount, payment_type, paid_date, added_on, added_by, updated_on, updated_by, deleted, status]
+
+7.	membership_plan_types =>
+
+		[id, membrship_type_id, membrship_type, plan_rent_amoumnt, added_on, added_by, updated_on, updated_by, deleted, status]
+
+8.	deposit_details =>
+
+		[id, customer_id, diposit_ammount, added_on, added_by, updated_on, updated_by, deleted, status]
+
+
+9.	complaint_details =>
+
+		[id, compatient_no, compatient, customer_id, document_path, added_on, added_by, updated_on, updated_by, deleted, status]
+
+9.	notice_period_details =>
+
+		[id, customer_id, np_start_date, np_end_date, added_on, added_by, updated_on, updated_by, deleted, status]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================ FOLDER STRUCTURE ======================================================
+
+		project_root/
+  ├── src/
+  |   ├── controllers/
+  |   |   ├── customerController.js
+  |   |   ├── userController.js
+  |   |   ├── propertyController.js
+  |   |   ├── roomController.js
+  |   |   ├── bedController.js
+  |   |   ├── rentController.js
+  |   |   ├── membershipPlanController.js
+  |   |   ├── depositController.js
+  |   |   ├── complaintController.js
+  |   |   └── noticePeriodController.js
+  |   |
+  |   ├── models/
+  |   |   ├── customerModel.js
+  |   |   ├── userModel.js
+  |   |   ├── propertyModel.js
+  |   |   ├── roomModel.js
+  |   |   ├── bedModel.js
+  |   |   ├── rentModel.js
+  |   |   ├── membershipPlanModel.js
+  |   |   ├── depositModel.js
+  |   |   ├── complaintModel.js
+  |   |   └── noticePeriodModel.js
+  |   |
+  |   ├── routes/
+  |   |   ├── customerRoutes.js
+  |   |   ├── userRoutes.js
+  |   |   ├── propertyRoutes.js
+  |   |   ├── roomRoutes.js
+  |   |   ├── bedRoutes.js
+  |   |   ├── rentRoutes.js
+  |   |   ├── membershipPlanRoutes.js
+  |   |   ├── depositRoutes.js
+  |   |   ├── complaintRoutes.js
+  |   |   └── noticePeriodRoutes.js
+  |   |
+  |   ├── config/
+  |   |   ├── database.js
+  |   |   └── other_config_files.js
+  |   |
+  |   ├── middleware/
+  |   |   ├── authenticationMiddleware.js
+  |   |   └── other_middlewares.js
+  |   |
+  |   ├── utils/
+  |   |   ├── helperFunctions.js
+  |   |   └── other_utils.js
+  |   |
+  |   └── app.js
+  |
+  ├── tests/  (Optional - For writing tests)
+  |
+  ├── node_modules/
+  ├── package.json
+  ├── package-lock.json
+  └── .gitignore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================ APP NAME ======================================================
+Renter 
+Rento
+
+
+RentEase
+PropMan
+RentSmart
+PropMinder
+LeaseZen
+ProptyHub
+RentTracker
+PropGo
+LeaseWizard
+RentNinja
+PropXpert
+LeasePal
+RentFlow
+PropWise
+LeaseGuru
+RentOasis
+PropGuard
+LeaseM8
+Rentify
+PropSage

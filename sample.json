@@ -1,0 +1,22 @@
+// user json  ============================================================================
+
+"user_id" : "U-1",
+"user_name" : "Sanket Potphode",
+"user_type" : "Super Admin",
+"user_type_id" : 1,
+"mobile_no" : "7887746393",
+"alternate_mobile_no" : "",
+"email_id" : "sanketpotphode09@gmail.com",
+"password" : "Sanket@111",
+"gender" : "Male",
+"address" : "Pune",
+"city" : "Pune",
+"state" : "Maharashtra",
+"country" : "India",
+"added_on" : "2023-07-30",
+"added_by" : "1",
+"updated_on" : "2023-07-30",
+"updated_by" : ""
+
+
+//  ============================================================================
