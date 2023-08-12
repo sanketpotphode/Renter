@@ -62,8 +62,8 @@ db.connect(function (err) {
     let customer_id = req.body.customer_id;
     let f_name = req.body.f_name;
     let m_name = req.body.m_name;
-    let l_name = f_name+" "+m_name+(m_name != "" || m_name !== NULL)?" ":""+l_name;
-    let full_name = req.body.full_name;
+    let l_name = req.body.l_name;;
+    let full_name = f_name+" "+m_name+(m_name != "" || m_name !== NULL)?" ":""+l_name;
     let mobile_no = req.body.mobile_no;
     let alternate_mobile_no = req.body.alternate_mobile_no;
     let email_id = req.body.email_id;
@@ -387,4 +387,5 @@ app.put('/deleteUser', function (req, res) {
 // Run on port
 app.listen(PORT_NO, () => {
   console.log(`Example app listening at http://localhost:${PORT_NO}`)
+
 });

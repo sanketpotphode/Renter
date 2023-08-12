@@ -415,7 +415,6 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 
-
 ALTER TABLE `user_details` ADD `user_type_id` INT(11) NOT NULL AFTER `user_type`;
 
 ALTER TABLE `user_details` CHANGE `deleted` `deleted` INT(11) NOT NULL DEFAULT '0';
