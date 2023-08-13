@@ -7,8 +7,18 @@ const {
 } = require('./configs/config.constats.js');
 // const port = 6500;
 
+// All Midulewares
 app.use(express.json());
 app.use(cors());
+
+// All Routes included
+const customerRoutes = require('./routes/customerRoutes');
+//const userRoutes = require('./userRoutes');
+
+
+app.use('/', customerRoutes);
+
+
 
 
 //------------------------------------------------------ API's For Customers starts -----------------------------------------
@@ -30,145 +40,145 @@ db.connect(function (err) {
   app.get('/', (req, res) => res.send('<center><h2>Welcome to rental management software.</h2></center>'));
   console.log("wecome to rental management software...");
 
-  // API to get all customers details
-  app.get('/customers', function (req, res) {
-    db.query('SELECT * FROM `customer_deatils` where status = 1', function (error, results, fields) {
-      if (error) throw error;
-      res.header("Access-Control-Allow-Origin", "*");
-      return res.send(results);
-    });
-  });
+  // // API to get all customers details
+  // app.get('/customers', function (req, res) {
+  //   db.query('SELECT * FROM `customer_deatils` where status = 1', function (error, results, fields) {
+  //     if (error) throw error;
+  //     res.header("Access-Control-Allow-Origin", "*");
+  //     return res.send(results);
+  //   });
+  // });
 
 
-  // API to get customer details by customer id
-  app.get('/customer/:id', function (req, res) {
-    let customer_id = req.params.id;
-    if (!customer_id) {
-      return res.status(400).send({ error: true, message: 'Please provide user_id' });
-    }
-    db.query('SELECT * FROM `customer_deatils` where status = 1 AND id=?', customer_id, function (error, results, fields) {
-      if (error) throw error;
-      // return res.send({ error: false, data: results[0], message: 'Customer not found.' });
-      res.header("Access-Control-Allow-Origin", "*");
-      return res.send(results);
-    });
-  });
+  // // API to get customer details by customer id
+  // app.get('/customer/:id', function (req, res) {
+  //   let customer_id = req.params.id;
+  //   if (!customer_id) {
+  //     return res.status(400).send({ error: true, message: 'Please provide user_id' });
+  //   }
+  //   db.query('SELECT * FROM `customer_deatils` where status = 1 AND id=?', customer_id, function (error, results, fields) {
+  //     if (error) throw error;
+  //     // return res.send({ error: false, data: results[0], message: 'Customer not found.' });
+  //     res.header("Access-Control-Allow-Origin", "*");
+  //     return res.send(results);
+  //   });
+  // });
 
 
-  // API for add new customer details  
-  app.post('/addCustomer', function (req, res) {
-    res.header("Access-Control-Allow-Origin", "*");
+  // // API for add new customer details  
+  // app.post('/addCustomer', function (req, res) {
+  //   res.header("Access-Control-Allow-Origin", "*");
 
-    let customer_id = req.body.customer_id;
-    let f_name = req.body.f_name;
-    let m_name = req.body.m_name;
-    let l_name = req.body.l_name;;
-    let full_name = f_name+" "+m_name+(m_name != "" || m_name !== NULL)?" ":""+l_name;
-    let mobile_no = req.body.mobile_no;
-    let alternate_mobile_no = req.body.alternate_mobile_no;
-    let email_id = req.body.email_id;
-    let gender = req.body.gender;
-    let date_of_birth = req.body.date_of_birth;
-    let address = req.body.address;
-    let city = req.body.city;
-    let state = req.body.state;
-    let country = req.body.country;
-    let blood_group = req.body.blood_group;
-    let profession = req.body.profession;
-    let membership_type_id = req.body.membership_type_id;
-    let room_or_flat_id = req.body.room_or_flat_id;
-    let bed_id = req.body.bed_id;
-    let manager_id = req.body.manager_id;
-    let aadhar_no = req.body.aadhar_no;
-    let pan_no = req.body.pan_no;
-    let voter_id = req.body.voter_id
-    let identity_document_path = req.body.identity_document_path;
-    let date_of_joining = req.body.date_of_joining;
-    let rent_pay_plan_date = req.body.rent_pay_plan_date;
-    let date_of_leaving = req.body.date_of_leaving;
-    let added_on = req.body.added_on;
-    let added_by = req.body.added_by;
-    let updated_on = req.body.updated_on;
-    let updated_by = req.body.updated_by;
-    let deleted = 0;
-    let status = 1;
+  //   let customer_id = req.body.customer_id;
+  //   let f_name = req.body.f_name;
+  //   let m_name = req.body.m_name;
+  //   let l_name = req.body.l_name;;
+  //   let full_name = f_name+" "+m_name+(m_name != "" || m_name !== NULL)?" ":""+l_name;
+  //   let mobile_no = req.body.mobile_no;
+  //   let alternate_mobile_no = req.body.alternate_mobile_no;
+  //   let email_id = req.body.email_id;
+  //   let gender = req.body.gender;
+  //   let date_of_birth = req.body.date_of_birth;
+  //   let address = req.body.address;
+  //   let city = req.body.city;
+  //   let state = req.body.state;
+  //   let country = req.body.country;
+  //   let blood_group = req.body.blood_group;
+  //   let profession = req.body.profession;
+  //   let membership_type_id = req.body.membership_type_id;
+  //   let room_or_flat_id = req.body.room_or_flat_id;
+  //   let bed_id = req.body.bed_id;
+  //   let manager_id = req.body.manager_id;
+  //   let aadhar_no = req.body.aadhar_no;
+  //   let pan_no = req.body.pan_no;
+  //   let voter_id = req.body.voter_id
+  //   let identity_document_path = req.body.identity_document_path;
+  //   let date_of_joining = req.body.date_of_joining;
+  //   let rent_pay_plan_date = req.body.rent_pay_plan_date;
+  //   let date_of_leaving = req.body.date_of_leaving;
+  //   let added_on = req.body.added_on;
+  //   let added_by = req.body.added_by;
+  //   let updated_on = req.body.updated_on;
+  //   let updated_by = req.body.updated_by;
+  //   let deleted = 0;
+  //   let status = 1;
 
-    if (!f_name && !email && !mobile && !l_name) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Content-Type", "application/json");
-      return res.status(400).send({ error: true, message: 'Please provide user' });
-    }
-    db.query("INSERT INTO `customer_deatils` SET ? ", { customer_id: customer_id, f_name: f_name, m_name: m_name, l_name: l_name, full_name: full_name, mobile_no: mobile_no, alternate_mobile_no: alternate_mobile_no, email_id: email_id, gender: gender, date_of_birth: date_of_birth, address: address, city: city, state: state, country: country, blood_group: blood_group, profession: profession, membership_type_id: membership_type_id, room_or_flat_id: room_or_flat_id, bed_id: bed_id, manager_id: manager_id, aadhar_no: aadhar_no, pan_no: pan_no, voter_id: voter_id, identity_document_path: identity_document_path, date_of_joining: date_of_joining, rent_pay_plan_date: rent_pay_plan_date, date_of_leaving: date_of_leaving, added_on: added_on, added_by: added_by, updated_on: updated_on, updated_by: updated_by, deleted: deleted, status: status }, function (error, results, fields) {
-      if (error) throw error;
-      res.header("Content-Type", "application/json");
-      res.header("Access-Control-Allow-Origin", "*");
-      return res.send({ error: false, data: results, message: 'New customer has been created successfully.' });
-    });
-  });
-
-
-  // API for updating customer details
-  app.put('/updateCustomer/:customer_id', function (req, res) {
-    res.header("Access-Control-Allow-Origin", "*");
-
-    let customer_id = req.params.customer_id;
-    let f_name = req.body.f_name;
-    let m_name = req.body.m_name;
-    let l_name = req.body.l_name;
-    let full_name = req.body.full_name;
-    let mobile_no = req.body.mobile_no;
-    let alternate_mobile_no = req.body.alternate_mobile_no;
-    let email_id = req.body.email_id;
-    let gender = req.body.gender;
-    let date_of_birth = req.body.date_of_birth;
-    let address = req.body.address;
-    let city = req.body.city;
-    let state = req.body.state;
-    let country = req.body.country;
-    let blood_group = req.body.blood_group;
-    let profession = req.body.profession;
-    let membership_type_id = req.body.membership_type_id;
-    let room_or_flat_id = req.body.room_or_flat_id;
-    let bed_id = req.body.bed_id;
-    let manager_id = req.body.manager_id;
-    let aadhar_no = req.body.aadhar_no;
-    let pan_no = req.body.pan_no;
-    let voter_id = req.body.voter_id;
-    let identity_document_path = req.body.identity_document_path;
-    let date_of_joining = req.body.date_of_joining;
-    let rent_pay_plan_date = req.body.rent_pay_plan_date;
-    let date_of_leaving = req.body.date_of_leaving;
-    let updated_on = req.body.updated_on;
-    let updated_by = req.body.updated_by;
-
-    if (!customer_id) {
-      res.header("Content-Type", "application/json");
-      return res.status(400).send({ error: true, message: 'Please provide customer_id' });
-    }
-
-    // Assuming `db` is your database connection instance
-    db.query("UPDATE `customer_deatils` SET ? WHERE customer_id = ?", [{ f_name, m_name, l_name, full_name, mobile_no, alternate_mobile_no, email_id, gender, date_of_birth, address, city, state, country, blood_group, profession, membership_type_id, room_or_flat_id, bed_id, manager_id, aadhar_no, pan_no, voter_id, identity_document_path, date_of_joining, rent_pay_plan_date, date_of_leaving, updated_on, updated_by }, customer_id], function (error, results, fields) {
-      if (error) throw error;
-      res.header("Content-Type", "application/json");
-      res.header("Access-Control-Allow-Origin", "*");
-      return res.send({ error: false, data: results, message: 'Customer details have been updated successfully.' });
-    });
-  });
+  //   if (!f_name && !email && !mobile && !l_name) {
+  //     res.header("Access-Control-Allow-Origin", "*");
+  //     res.header("Content-Type", "application/json");
+  //     return res.status(400).send({ error: true, message: 'Please provide user' });
+  //   }
+  //   db.query("INSERT INTO `customer_deatils` SET ? ", { customer_id: customer_id, f_name: f_name, m_name: m_name, l_name: l_name, full_name: full_name, mobile_no: mobile_no, alternate_mobile_no: alternate_mobile_no, email_id: email_id, gender: gender, date_of_birth: date_of_birth, address: address, city: city, state: state, country: country, blood_group: blood_group, profession: profession, membership_type_id: membership_type_id, room_or_flat_id: room_or_flat_id, bed_id: bed_id, manager_id: manager_id, aadhar_no: aadhar_no, pan_no: pan_no, voter_id: voter_id, identity_document_path: identity_document_path, date_of_joining: date_of_joining, rent_pay_plan_date: rent_pay_plan_date, date_of_leaving: date_of_leaving, added_on: added_on, added_by: added_by, updated_on: updated_on, updated_by: updated_by, deleted: deleted, status: status }, function (error, results, fields) {
+  //     if (error) throw error;
+  //     res.header("Content-Type", "application/json");
+  //     res.header("Access-Control-Allow-Origin", "*");
+  //     return res.send({ error: false, data: results, message: 'New customer has been created successfully.' });
+  //   });
+  // });
 
 
+  // // API for updating customer details
+  // app.put('/updateCustomer/:customer_id', function (req, res) {
+  //   res.header("Access-Control-Allow-Origin", "*");
 
-  //  Delete customers by update status
-  app.put('/deleteCandidate', function (req, res) {
-    let candidate_id = req.body.candidate_id;
-    if (!candidate_id) {
-      return res.status(400).send({ message: 'Please provide candidate_id' });
-    }
-    db.query("UPDATE `customer_deatils` SET `status` = ? WHERE id = ?", [0, candidate_id], function (error, results, fields) {
-      if (error) throw error;
-      res.header("Access-Control-Allow-Origin", "*");
-      return res.send({ error: false, data: results, message: 'candidate has been deleted successfully.' });
-    });
-  });
+  //   let customer_id = req.params.customer_id;
+  //   let f_name = req.body.f_name;
+  //   let m_name = req.body.m_name;
+  //   let l_name = req.body.l_name;
+  //   let full_name = req.body.full_name;
+  //   let mobile_no = req.body.mobile_no;
+  //   let alternate_mobile_no = req.body.alternate_mobile_no;
+  //   let email_id = req.body.email_id;
+  //   let gender = req.body.gender;
+  //   let date_of_birth = req.body.date_of_birth;
+  //   let address = req.body.address;
+  //   let city = req.body.city;
+  //   let state = req.body.state;
+  //   let country = req.body.country;
+  //   let blood_group = req.body.blood_group;
+  //   let profession = req.body.profession;
+  //   let membership_type_id = req.body.membership_type_id;
+  //   let room_or_flat_id = req.body.room_or_flat_id;
+  //   let bed_id = req.body.bed_id;
+  //   let manager_id = req.body.manager_id;
+  //   let aadhar_no = req.body.aadhar_no;
+  //   let pan_no = req.body.pan_no;
+  //   let voter_id = req.body.voter_id;
+  //   let identity_document_path = req.body.identity_document_path;
+  //   let date_of_joining = req.body.date_of_joining;
+  //   let rent_pay_plan_date = req.body.rent_pay_plan_date;
+  //   let date_of_leaving = req.body.date_of_leaving;
+  //   let updated_on = req.body.updated_on;
+  //   let updated_by = req.body.updated_by;
+
+  //   if (!customer_id) {
+  //     res.header("Content-Type", "application/json");
+  //     return res.status(400).send({ error: true, message: 'Please provide customer_id' });
+  //   }
+
+  //   // Assuming `db` is your database connection instance
+  //   db.query("UPDATE `customer_deatils` SET ? WHERE customer_id = ?", [{ f_name, m_name, l_name, full_name, mobile_no, alternate_mobile_no, email_id, gender, date_of_birth, address, city, state, country, blood_group, profession, membership_type_id, room_or_flat_id, bed_id, manager_id, aadhar_no, pan_no, voter_id, identity_document_path, date_of_joining, rent_pay_plan_date, date_of_leaving, updated_on, updated_by }, customer_id], function (error, results, fields) {
+  //     if (error) throw error;
+  //     res.header("Content-Type", "application/json");
+  //     res.header("Access-Control-Allow-Origin", "*");
+  //     return res.send({ error: false, data: results, message: 'Customer details have been updated successfully.' });
+  //   });
+  // });
+
+
+
+  // //  Delete customers by update status
+  // app.put('/deleteCandidate', function (req, res) {
+  //   let candidate_id = req.body.candidate_id;
+  //   if (!candidate_id) {
+  //     return res.status(400).send({ message: 'Please provide candidate_id' });
+  //   }
+  //   db.query("UPDATE `customer_deatils` SET `status` = ? WHERE id = ?", [0, candidate_id], function (error, results, fields) {
+  //     if (error) throw error;
+  //     res.header("Access-Control-Allow-Origin", "*");
+  //     return res.send({ error: false, data: results, message: 'candidate has been deleted successfully.' });
+  //   });
+  // });
 
 
 });
@@ -374,9 +384,81 @@ app.put('/deleteUser', function (req, res) {
 //------------------------------------------------------ API's For Users ends -----------------------------------------
 
 
+//------------------------------------------------------ API's For Property starts -----------------------------------------
 
 
+// API to get all property details
+app.get('/properties', function (req, res) {
+  db.query('SELECT * FROM `properties`', function (error, results, fields) {
+    if (error) throw error;
+    res.header("Access-Control-Allow-Origin", "*");
+    return res.send(results);
+  });
+});
 
+// API to get property details by property id
+app.get('/property/:id', function (req, res) {
+  let property_id = req.params.id;
+  if (!property_id) {
+    return res.status(400).send({ error: true, message: 'Please provide property_id' });
+  }
+  db.query('SELECT * FROM `properties` WHERE id=?', property_id, function (error, results, fields) {
+    if (error) throw error;
+    res.header("Access-Control-Allow-Origin", "*");
+    return res.send(results);
+  });
+});
+
+// API for adding a new property
+app.post('/addProperty', function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  
+  // Extract property details from the request body
+  let propertyDetails = req.body;
+
+  if (!propertyDetails.name || !propertyDetails.address || !propertyDetails.city || !propertyDetails.state || !propertyDetails.country || !propertyDetails.pincode) {
+    return res.status(400).send({ error: true, message: 'Please provide required property details' });
+  }
+
+  db.query("INSERT INTO `properties` SET ?", propertyDetails, function (error, results, fields) {
+    if (error) throw error;
+    res.header("Access-Control-Allow-Origin", "*");
+    return res.send({ error: false, data: results, message: 'New property has been added successfully.' });
+  });
+});
+
+// API for updating property details
+app.put('/updateProperty/:property_id', function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  
+  let property_id = req.params.property_id;
+  let updatedPropertyDetails = req.body;
+
+  if (!property_id) {
+    return res.status(400).send({ error: true, message: 'Please provide property_id' });
+  }
+
+  db.query("UPDATE `properties` SET ? WHERE id = ?", [updatedPropertyDetails, property_id], function (error, results, fields) {
+    if (error) throw error;
+    res.header("Access-Control-Allow-Origin", "*");
+    return res.send({ error: false, data: results, message: 'Property details have been updated successfully.' });
+  });
+});
+
+
+// API to mark a property as deleted
+app.put('/deleteProperty', function (req, res) {
+  let property_id = req.body.property_id;
+  if (!property_id) {
+    return res.status(400).send({ message: 'Please provide property_id' });
+  }
+  
+  db.query("UPDATE `properties` SET `status` = ? WHERE id = ?", [0, property_id], function (error, results, fields) {
+    if (error) throw error;
+    res.header("Access-Control-Allow-Origin", "*");
+    return res.send({ error: false, data: results, message: 'Property has been marked as deleted successfully.' });
+  });
+});
 
 
 
