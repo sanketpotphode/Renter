@@ -422,3 +422,5 @@ ALTER TABLE `user_details` CHANGE `deleted` `deleted` INT(11) NOT NULL DEFAULT '
 ALTER TABLE `notice_period_details` CHANGE `added_by` `added_by` INT NOT NULL;
 
 ALTER TABLE `notice_period_details` CHANGE `updated_on` `updated_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `customer_deatils` CHANGE `added_by` `added_by` INT(2) NOT NULL;
