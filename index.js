@@ -12,11 +12,20 @@ app.use(express.json());
 app.use(cors());
 
 // All Routes included
+const protectedRoute = require('./routes/protectedRoute'); // Adjust the path accordingly
+const adminRoute = require('./routes/adminRoute'); // Adjust the path accordingly
+const fileUploadRoute = require('./routes/fileUploadRoute'); // Adjust the path accordingly
+
 const customerRoutes = require('./routes/customerRoutes');
 const userRoutes = require('./routes/userRoutes'); 
 const bedRoutes = require('./routes/bedRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
 
+
+// app.use('/protected', protectedRoute);
+// // Mount the admin route on a specific path
+// app.use('/admin', adminRoute);
+// app.use('/file-upload', fileUploadRoute);
 
 app.use('/', customerRoutes);
 app.use('/beds', bedRoutes);
@@ -473,5 +482,5 @@ db.connect(function (err) {
 // Run on port
 app.listen(PORT_NO, () => {
   console.log(`Example app listening at http://localhost:${PORT_NO}`)
-  
+
 });
