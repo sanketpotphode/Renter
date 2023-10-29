@@ -13,13 +13,15 @@ app.use(cors());
 
 // All Routes included
 const customerRoutes = require('./routes/customerRoutes');
-//const userRoutes = require('./userRoutes');
+const userRoutes = require('./routes/userRoutes'); 
 const bedRoutes = require('./routes/bedRoutes');
-// ...
+const propertyRoutes = require('./routes/propertyRoutes');
 
 
 app.use('/', customerRoutes);
 app.use('/beds', bedRoutes);
+app.use('/users', userRoutes);
+app.use('/properties', propertyRoutes);
 
 
 
@@ -190,197 +192,197 @@ db.connect(function (err) {
 
 //------------------------------------------------------ API's For Users start --------------------------------------------
 
-// API for adding new user details
-app.post('/addUser', function (req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
+// // API for adding new user details
+// app.post('/addUser', function (req, res) {
+//   res.header("Access-Control-Allow-Origin", "*");
 
-  // Extract user details from the request body
-  let {
-    user_id,
-    user_name,
-    user_type,
-    user_type_id,
-    mobile_no,
-    alternate_mobile_no,
-    email_id,
-    password,
-    gender,
-    address,
-    city,
-    state,
-    country,
-    added_on,
-    added_by,
-    updated_on,
-    updated_by
-  } = req.body;
+//   // Extract user details from the request body
+//   let {
+//     user_id,
+//     user_name,
+//     user_type,
+//     user_type_id,
+//     mobile_no,
+//     alternate_mobile_no,
+//     email_id,
+//     password,
+//     gender,
+//     address,
+//     city,
+//     state,
+//     country,
+//     added_on,
+//     added_by,
+//     updated_on,
+//     updated_by
+//   } = req.body;
 
-  // Check if required fields are provided
-  if (!user_id || !user_name || !user_type_id || !mobile_no || !email_id || !password) {
-    res.header("Content-Type", "application/json");
-    return res.status(400).send({ error: true, message: 'Please provide all required fields.' });
-  }
+//   // Check if required fields are provided
+//   if (!user_id || !user_name || !user_type_id || !mobile_no || !email_id || !password) {
+//     res.header("Content-Type", "application/json");
+//     return res.status(400).send({ error: true, message: 'Please provide all required fields.' });
+//   }
 
-  let deleted = 0;
-  let status = 1;
-  // Prepare the data object to be inserted into the database
-  const user = {
-    user_id,
-    user_name,
-    user_type,
-    user_type_id,
-    mobile_no,
-    alternate_mobile_no,
-    email_id,
-    password,
-    gender,
-    address,
-    city,
-    state,
-    country,
-    added_on,
-    added_by,
-    updated_on,
-    updated_by,
-    deleted,
-    status
-  };
+//   let deleted = 0;
+//   let status = 1;
+//   // Prepare the data object to be inserted into the database
+//   const user = {
+//     user_id,
+//     user_name,
+//     user_type,
+//     user_type_id,
+//     mobile_no,
+//     alternate_mobile_no,
+//     email_id,
+//     password,
+//     gender,
+//     address,
+//     city,
+//     state,
+//     country,
+//     added_on,
+//     added_by,
+//     updated_on,
+//     updated_by,
+//     deleted,
+//     status
+//   };
 
-  // Execute the INSERT query
-  db.query("INSERT INTO `user_details` SET ?", user, function (error, results, fields) {
-    if (error) throw error;
-    res.header("Content-Type", "application/json");
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send({ error: false, data: results, message: 'New user has been added successfully.' });
-  });
-});
-
-
-
-// API for updating user details
-app.put('/updateUser/:id', function (req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-
-  let id = req.params.id;
-
-  // Extract user details from the request body
-  let {
-    user_name,
-    user_type,
-    user_type_id,
-    mobile_no,
-    alternate_mobile_no,
-    email_id,
-    password,
-    gender,
-    address,
-    city,
-    state,
-    country,
-    added_on,
-    added_by,
-    updated_on,
-    updated_by
-  } = req.body;
-
-  // Check if required fields are provided
-  if (!user_name || !user_type_id || !mobile_no || !email_id || !password) {
-    res.header("Content-Type", "application/json");
-    return res.status(400).send({ error: true, message: 'Please provide all required fields.' });
-  }
-
-  let deleted = 0;
-  let status = 1;
-
-  // Prepare the data object to be updated in the database
-  const updatedUser = {
-    user_name,
-    user_type,
-    user_type_id,
-    mobile_no,
-    alternate_mobile_no,
-    email_id,
-    password,
-    gender,
-    address,
-    city,
-    state,
-    country,
-    added_on,
-    added_by,
-    updated_on,
-    updated_by,
-    deleted,
-    status
-  };
-
-  // Execute the UPDATE query
-  db.query("UPDATE `user_details` SET ? WHERE id = ?", [updatedUser, id], function (error, results, fields) {
-    if (error) throw error;
-    res.header("Content-Type", "application/json");
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send({ error: false, data: results, message: 'User details have been updated successfully.' });
-  });
-});
-
-
-// API for updating user password
-app.put('/updateUserPassword/:id', function (req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-
-  let id = req.params.id;
-  let new_password = req.body.new_password;
-
-  // Check if the new_password is provided
-  if (!new_password) {
-    res.header("Content-Type", "application/json");
-    return res.status(400).send({ error: true, message: 'Please provide the new password.' });
-  }
-
-  // Prepare the data object to update the password in the database
-  const updatedPassword = {
-    password: new_password
-  };
-
-  // Execute the UPDATE query to update the user's password
-  db.query("UPDATE `user_details` SET ? WHERE id = ?", [updatedPassword, id], function (error, results, fields) {
-    if (error) throw error;
-    res.header("Content-Type", "application/json");
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send({ error: false, data: results, message: 'User password has been updated successfully.' });
-  });
-});
-
-
-//API to get all users
-app.get('/getAllUsers', function (req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-
-  // Assuming you have established a database connection (`db`)
-
-  // Execute the SELECT query to fetch all users
-  db.query("SELECT * FROM `user_details`", function (error, results, fields) {
-    if (error) throw error;
-    res.header("Content-Type", "application/json");
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send({ error: false, data: results, message: 'All users retrieved successfully.' });
-  });
-});
+//   // Execute the INSERT query
+//   db.query("INSERT INTO `user_details` SET ?", user, function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Content-Type", "application/json");
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send({ error: false, data: results, message: 'New user has been added successfully.' });
+//   });
+// });
 
 
 
-// Delete users by updating status
-app.put('/deleteUser', function (req, res) {
-  let user_id = req.body.user_id;
-  if (!user_id) {
-    return res.status(400).send({ message: 'Please provide user_id' });
-  }
-  db.query("UPDATE `user_details` SET `status` = ? WHERE id = ?", [0, user_id], function (error, results, fields) {
-    if (error) throw error;
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send({ error: false, data: results, message: 'User has been deleted successfully.' });
-  });
-});
+// // API for updating user details
+// app.put('/updateUser/:id', function (req, res) {
+//   res.header("Access-Control-Allow-Origin", "*");
+
+//   let id = req.params.id;
+
+//   // Extract user details from the request body
+//   let {
+//     user_name,
+//     user_type,
+//     user_type_id,
+//     mobile_no,
+//     alternate_mobile_no,
+//     email_id,
+//     password,
+//     gender,
+//     address,
+//     city,
+//     state,
+//     country,
+//     added_on,
+//     added_by,
+//     updated_on,
+//     updated_by
+//   } = req.body;
+
+//   // Check if required fields are provided
+//   if (!user_name || !user_type_id || !mobile_no || !email_id || !password) {
+//     res.header("Content-Type", "application/json");
+//     return res.status(400).send({ error: true, message: 'Please provide all required fields.' });
+//   }
+
+//   let deleted = 0;
+//   let status = 1;
+
+//   // Prepare the data object to be updated in the database
+//   const updatedUser = {
+//     user_name,
+//     user_type,
+//     user_type_id,
+//     mobile_no,
+//     alternate_mobile_no,
+//     email_id,
+//     password,
+//     gender,
+//     address,
+//     city,
+//     state,
+//     country,
+//     added_on,
+//     added_by,
+//     updated_on,
+//     updated_by,
+//     deleted,
+//     status
+//   };
+
+//   // Execute the UPDATE query
+//   db.query("UPDATE `user_details` SET ? WHERE id = ?", [updatedUser, id], function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Content-Type", "application/json");
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send({ error: false, data: results, message: 'User details have been updated successfully.' });
+//   });
+// });
+
+
+// // API for updating user password
+// app.put('/updateUserPassword/:id', function (req, res) {
+//   res.header("Access-Control-Allow-Origin", "*");
+
+//   let id = req.params.id;
+//   let new_password = req.body.new_password;
+
+//   // Check if the new_password is provided
+//   if (!new_password) {
+//     res.header("Content-Type", "application/json");
+//     return res.status(400).send({ error: true, message: 'Please provide the new password.' });
+//   }
+
+//   // Prepare the data object to update the password in the database
+//   const updatedPassword = {
+//     password: new_password
+//   };
+
+//   // Execute the UPDATE query to update the user's password
+//   db.query("UPDATE `user_details` SET ? WHERE id = ?", [updatedPassword, id], function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Content-Type", "application/json");
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send({ error: false, data: results, message: 'User password has been updated successfully.' });
+//   });
+// });
+
+
+// //API to get all users
+// app.get('/getAllUsers', function (req, res) {
+//   res.header("Access-Control-Allow-Origin", "*");
+
+//   // Assuming you have established a database connection (`db`)
+
+//   // Execute the SELECT query to fetch all users
+//   db.query("SELECT * FROM `user_details`", function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Content-Type", "application/json");
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send({ error: false, data: results, message: 'All users retrieved successfully.' });
+//   });
+// });
+
+
+
+// // Delete users by updating status
+// app.put('/deleteUser', function (req, res) {
+//   let user_id = req.body.user_id;
+//   if (!user_id) {
+//     return res.status(400).send({ message: 'Please provide user_id' });
+//   }
+//   db.query("UPDATE `user_details` SET `status` = ? WHERE id = ?", [0, user_id], function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send({ error: false, data: results, message: 'User has been deleted successfully.' });
+//   });
+// });
 
 
 //------------------------------------------------------ API's For Users ends -----------------------------------------
@@ -389,78 +391,78 @@ app.put('/deleteUser', function (req, res) {
 //------------------------------------------------------ API's For Property starts -----------------------------------------
 
 
-// API to get all property details
-app.get('/properties', function (req, res) {
-  db.query('SELECT * FROM `properties`', function (error, results, fields) {
-    if (error) throw error;
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send(results);
-  });
-});
+// // API to get all property details
+// app.get('/properties', function (req, res) {
+//   db.query('SELECT * FROM `properties`', function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send(results);
+//   });
+// });
 
-// API to get property details by property id
-app.get('/property/:id', function (req, res) {
-  let property_id = req.params.id;
-  if (!property_id) {
-    return res.status(400).send({ error: true, message: 'Please provide property_id' });
-  }
-  db.query('SELECT * FROM `properties` WHERE id=?', property_id, function (error, results, fields) {
-    if (error) throw error;
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send(results);
-  });
-});
+// // API to get property details by property id
+// app.get('/property/:id', function (req, res) {
+//   let property_id = req.params.id;
+//   if (!property_id) {
+//     return res.status(400).send({ error: true, message: 'Please provide property_id' });
+//   }
+//   db.query('SELECT * FROM `properties` WHERE id=?', property_id, function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send(results);
+//   });
+// });
 
-// API for adding a new property
-app.post('/addProperty', function (req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
+// // API for adding a new property
+// app.post('/addProperty', function (req, res) {
+//   res.header("Access-Control-Allow-Origin", "*");
   
-  // Extract property details from the request body
-  let propertyDetails = req.body;
+//   // Extract property details from the request body
+//   let propertyDetails = req.body;
 
-  if (!propertyDetails.name || !propertyDetails.address || !propertyDetails.city || !propertyDetails.state || !propertyDetails.country || !propertyDetails.pincode) {
-    return res.status(400).send({ error: true, message: 'Please provide required property details' });
-  }
+//   if (!propertyDetails.name || !propertyDetails.address || !propertyDetails.city || !propertyDetails.state || !propertyDetails.country || !propertyDetails.pincode) {
+//     return res.status(400).send({ error: true, message: 'Please provide required property details' });
+//   }
 
-  db.query("INSERT INTO `properties` SET ?", propertyDetails, function (error, results, fields) {
-    if (error) throw error;
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send({ error: false, data: results, message: 'New property has been added successfully.' });
-  });
-});
+//   db.query("INSERT INTO `properties` SET ?", propertyDetails, function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send({ error: false, data: results, message: 'New property has been added successfully.' });
+//   });
+// });
 
-// API for updating property details
-app.put('/updateProperty/:property_id', function (req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
+// // API for updating property details
+// app.put('/updateProperty/:property_id', function (req, res) {
+//   res.header("Access-Control-Allow-Origin", "*");
   
-  let property_id = req.params.property_id;
-  let updatedPropertyDetails = req.body;
+//   let property_id = req.params.property_id;
+//   let updatedPropertyDetails = req.body;
 
-  if (!property_id) {
-    return res.status(400).send({ error: true, message: 'Please provide property_id' });
-  }
+//   if (!property_id) {
+//     return res.status(400).send({ error: true, message: 'Please provide property_id' });
+//   }
 
-  db.query("UPDATE `properties` SET ? WHERE id = ?", [updatedPropertyDetails, property_id], function (error, results, fields) {
-    if (error) throw error;
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send({ error: false, data: results, message: 'Property details have been updated successfully.' });
-  });
-});
+//   db.query("UPDATE `properties` SET ? WHERE id = ?", [updatedPropertyDetails, property_id], function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send({ error: false, data: results, message: 'Property details have been updated successfully.' });
+//   });
+// });
 
 
-// API to mark a property as deleted
-app.put('/deleteProperty', function (req, res) {
-  let property_id = req.body.property_id;
-  if (!property_id) {
-    return res.status(400).send({ message: 'Please provide property_id' });
-  }
+// // API to mark a property as deleted
+// app.put('/deleteProperty', function (req, res) {
+//   let property_id = req.body.property_id;
+//   if (!property_id) {
+//     return res.status(400).send({ message: 'Please provide property_id' });
+//   }
   
-  db.query("UPDATE `properties` SET `status` = ? WHERE id = ?", [0, property_id], function (error, results, fields) {
-    if (error) throw error;
-    res.header("Access-Control-Allow-Origin", "*");
-    return res.send({ error: false, data: results, message: 'Property has been marked as deleted successfully.' });
-  });
-});
+//   db.query("UPDATE `properties` SET `status` = ? WHERE id = ?", [0, property_id], function (error, results, fields) {
+//     if (error) throw error;
+//     res.header("Access-Control-Allow-Origin", "*");
+//     return res.send({ error: false, data: results, message: 'Property has been marked as deleted successfully.' });
+//   });
+// });
 
 
 
@@ -471,5 +473,5 @@ app.put('/deleteProperty', function (req, res) {
 // Run on port
 app.listen(PORT_NO, () => {
   console.log(`Example app listening at http://localhost:${PORT_NO}`)
-
+  
 });
