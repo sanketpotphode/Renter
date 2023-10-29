@@ -60,19 +60,6 @@ Database : MySQL
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ================================================ FOLDER STRUCTURE ======================================================
 
 		project_root/
@@ -150,11 +137,45 @@ Database : MySQL
 3. Bed & Rooms avilablity
 4. 
 
+================================================ Functionality to handle ======================================================
 
+1.Authentication and Authorization :
 
+2. Validation and Error Handling :
 
+3. API Documentation :
 
+4. Testing :
 
+5. Data Migration and Seeding :
+
+6. Security :
+
+7. Data Backups :
+
+8. Logging :
+
+9. Notifications :
+
+10. Scalability :
+
+11. Data Privacy and GDPR :
+
+12. UI/UX: 
+
+13. Payment Integration :
+
+14. Reporting :
+
+15. Documentation :
+
+16. Maintenance and Support :
+
+17. Version Control :
+
+18. Deployment :
+
+19. 
 
 
 

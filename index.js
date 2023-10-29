@@ -14,10 +14,12 @@ app.use(cors());
 // All Routes included
 const customerRoutes = require('./routes/customerRoutes');
 //const userRoutes = require('./userRoutes');
+const bedRoutes = require('./routes/bedRoutes');
+// ...
 
 
 app.use('/', customerRoutes);
-
+app.use('/beds', bedRoutes);
 
 
 
