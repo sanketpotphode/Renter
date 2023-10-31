@@ -1,61 +1,68 @@
-const Room = require('../models/roomModel');
+const db = require('../configs/config.database'); // Adjust the path accordingly
 
-const getAllRooms = async (req, res) => {
-  try {
-    const rooms = await Room.getAllRooms();
-    res.header("Access-Control-Allow-Origin", "*");
-    res.send(rooms);
-  } catch (error) {
-    res.status(500).send({ error: true, message: 'Error retrieving rooms' });
-  }
+// Function to get all rooms
+const getAllRooms = () => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM rooms_or_flats WHERE status = 1', (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
 };
 
-const getRoomById = async (req, res) => {
-  try {
-    const roomId = req.params.id;
-    const room = await Room.getRoomById(roomId);
-    if (!room) {
-      return res.status(404).send({ error: true, message: 'Room not found' });
-    }
-    res.header("Access-Control-Allow-Origin", "*");
-    res.send(room);
-  } catch (error) {
-    res.status(500).send({ error: true, message: 'Error retrieving room details' });
-  }
+// Function to get room details by room ID
+const getRoomById = (roomId) => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM rooms_or_flats WHERE status = 1 AND id = ?', [roomId], (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results[0]);
+      }
+    });
+  });
 };
 
-const addRoom = async (req, res) => {
-  try {
-    const roomData = req.body;
-    const result = await Room.addRoom(roomData);
-    res.header("Access-Control-Allow-Origin", "*");
-    res.send({ error: false, data: result, message: 'New room added successfully.' });
-  } catch (error) {
-    res.status(500).send({ error: true, message: 'Error adding room' });
-  }
+// Function to add a new room
+const addRoom = (roomData) => {
+  return new Promise((resolve, reject) => {
+    db.query('INSERT INTO rooms_or_flats SET ?', roomData, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
 };
 
-const updateRoom = async (req, res) => {
-  try {
-    const roomId = req.params.id;
-    const updatedRoomData = req.body;
-    const result = await Room.updateRoom(roomId, updatedRoomData);
-    res.header("Access-Control-Allow-Origin", "*");
-    res.send({ error: false, data: result, message: 'Room details updated successfully.' });
-  } catch (error) {
-    res.status(500).send({ error: true, message: 'Error updating room details' });
-  }
+// Function to update room details
+const updateRoom = (roomId, updatedRoomData) => {
+  return new Promise((resolve, reject) => {
+    db.query('UPDATE rooms_or_flats SET ? WHERE id = ?', [updatedRoomData, roomId], (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
 };
 
-const deleteRoom = async (req, res) => {
-  try {
-    const roomId = req.params.id;
-    const result = await Room.deleteRoom(roomId);
-    res.header("Access-Control-Allow-Origin", "*");
-    res.send({ error: false, data: result, message: 'Room deleted successfully.' });
-  } catch (error) {
-    res.status(500).send({ error: true, message: 'Error deleting room' });
-  }
+// Function to delete a room
+const deleteRoom = (roomId) => {
+  return new Promise((resolve, reject) => {
+    db.query('UPDATE rooms_or_flats SET status = 0 WHERE id = ?', [roomId], (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
 };
 
 module.exports = {

@@ -23,7 +23,7 @@ const getMembershipPlanById = (membershipTypeId) => {
         resolve(results[0]);
       }
     });
-  };
+  });
 };
 
 // Function to add a new membership plan
@@ -36,7 +36,7 @@ const addMembershipPlan = (membershipPlanData) => {
         resolve(results);
       }
     });
-  };
+  });
 };
 
 // Function to update membership plan details
@@ -49,7 +49,7 @@ const updateMembershipPlan = (membershipTypeId, updatedMembershipPlanData) => {
         resolve(results);
       }
     });
-  };
+  });
 };
 
 // Function to delete a membership plan
@@ -62,7 +62,7 @@ const deleteMembershipPlan = (membershipTypeId) => {
         resolve(results);
       }
     });
-  };
+  });
 };
 
 module.exports = {
