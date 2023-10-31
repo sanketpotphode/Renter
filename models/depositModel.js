@@ -23,7 +23,7 @@ const getDepositByCustomerId = (customerId) => {
         resolve(results[0]);
       }
     });
-  };
+  });
 };
 
 // Function to add a new deposit
@@ -36,7 +36,7 @@ const addDeposit = (depositData) => {
         resolve(results);
       }
     });
-  };
+  });
 };
 
 // Function to update deposit details
@@ -49,7 +49,7 @@ const updateDeposit = (customerId, updatedDepositData) => {
         resolve(results);
       }
     });
-  };
+  });
 };
 
 // Function to delete a deposit
@@ -62,7 +62,7 @@ const deleteDeposit = (customerId) => {
         resolve(results);
       }
     });
-  };
+  });
 };
 
 module.exports = {
