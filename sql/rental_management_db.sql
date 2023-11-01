@@ -424,3 +424,263 @@ ALTER TABLE `notice_period_details` CHANGE `added_by` `added_by` INT NOT NULL;
 ALTER TABLE `notice_period_details` CHANGE `updated_on` `updated_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE `customer_deatils` CHANGE `added_by` `added_by` INT(2) NOT NULL;
+
+
+
+-- ============================== created new tables ===================================
+
+CREATE TABLE maintenance_requests (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  request_id VARCHAR(255) NOT NULL,
+  customer_id INT NOT NULL,
+  request_description TEXT,
+  request_date DATE NOT NULL,
+  assigned_to INT,
+  status VARCHAR(255),
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+
+
+CREATE TABLE lease_management (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  lease_id VARCHAR(255) NOT NULL,
+  property_id INT NOT NULL,
+  customer_id INT NOT NULL,
+  lease_start_date DATE NOT NULL,
+  lease_end_date DATE NOT NULL,
+  rent_amount DECIMAL(10, 2),
+  payment_frequency VARCHAR(255),
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+
+CREATE TABLE payments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  payment_id VARCHAR(255) NOT NULL,
+  customer_id INT NOT NULL,
+  payment_date DATE NOT NULL,
+  payment_amount DECIMAL(10, 2) NOT NULL,
+  payment_method VARCHAR(255),
+  payment_status VARCHAR(255),
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+
+CREATE TABLE vendors (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  vendor_id VARCHAR(255) NOT NULL,
+  vendor_name VARCHAR(255) NOT NULL,
+  contact_name VARCHAR(255),
+  contact_email VARCHAR(255),
+  contact_phone VARCHAR(20),
+  address TEXT,
+  city VARCHAR(255),
+  state VARCHAR(255),
+  country VARCHAR(255),
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+CREATE TABLE vendor_products (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  vendor_product_id VARCHAR(255) NOT NULL,
+  vendor_id INT NOT NULL,
+  product_name VARCHAR(255) NOT NULL,
+  product_description TEXT,
+  price DECIMAL(10, 2),
+  quantity INT,
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+
+CREATE TABLE visitors (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  visitor_id VARCHAR(255) NOT NULL,
+  visitor_name VARCHAR(255) NOT NULL,
+  visitor_type VARCHAR(255),
+  customer_id INT NOT NULL,
+  check_in_time DATETIME NOT NULL,
+  check_out_time DATETIME,
+  purpose TEXT,
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+CREATE TABLE inventory (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  item_id VARCHAR(255) NOT NULL,
+  item_name VARCHAR(255) NOT NULL,
+  item_description TEXT,
+  quantity INT,
+  category VARCHAR(255),
+  purchase_date DATE,
+  purchase_price DECIMAL(10, 2),
+  location TEXT,
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+CREATE TABLE expenses (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  expense_id VARCHAR(255) NOT NULL,
+  customer_id INT NOT NULL,
+  expense_date DATE NOT NULL,
+  expense_description TEXT,
+  expense_amount DECIMAL(10, 2) NOT NULL,
+  category VARCHAR(255),
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+CREATE TABLE dashboard (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT NOT NULL,
+  data JSON,
+  date DATE,
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+
+CREATE TABLE legal_compliance (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  compliance_id VARCHAR(255) NOT NULL,
+  customer_id INT NOT NULL,
+  compliance_type VARCHAR(255) NOT NULL,
+  due_date DATE NOT NULL,
+  status VARCHAR(255),
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+CREATE TABLE analytics (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT NOT NULL,
+  data JSON,
+  date DATE,
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+CREATE TABLE tenant_portal (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT NOT NULL,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+CREATE TABLE tenant_screening (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  screening_id VARCHAR(255) NOT NULL,
+  customer_id INT NOT NULL,
+  applicant_name VARCHAR(255) NOT NULL,
+  application_date DATE NOT NULL,
+  status VARCHAR(255),
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+CREATE TABLE smart_home_devices (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  device_id VARCHAR(255) NOT NULL,
+  customer_id INT NOT NULL,
+  device_name VARCHAR(255) NOT NULL,
+  device_type VARCHAR(255),
+  status VARCHAR(255),
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+CREATE TABLE marketing_campaigns (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  campaign_id VARCHAR(255) NOT NULL,
+  customer_id INT NOT NULL,
+  campaign_name VARCHAR(255) NOT NULL,
+  campaign_type VARCHAR(255),
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  description TEXT,
+  status VARCHAR(255),
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+
+CREATE TABLE energy_efficiency_data (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT NOT NULL,
+  data JSON,
+  date DATE,
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+
+CREATE TABLE property_manager_app_data (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT NOT NULL,
+  data JSON,
+  date DATE,
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN
+);
+
+
