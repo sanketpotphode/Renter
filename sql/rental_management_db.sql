@@ -684,3 +684,16 @@ CREATE TABLE property_manager_app_data (
 );
 
 
+CREATE TABLE rules_and_regulations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  rule_id VARCHAR(255) NOT NULL,
+  customer_id INT NOT NULL,
+  rule_name VARCHAR(255) NOT NULL,
+  description TEXT,
+  added_on DATETIME,
+  added_by INT,
+  updated_on DATETIME,
+  updated_by INT,
+  deleted BOOLEAN,
+  status VARCHAR(255)
+);

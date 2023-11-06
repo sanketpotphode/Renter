@@ -51,9 +51,73 @@ Database : MySQL
 
 		[id, customer_id, np_start_date, np_end_date, added_on, added_by, updated_on, updated_by, deleted, status]
 
+10. maintenance_requests =>
 
+  [id, request_id, customer_id, request_description, request_date, assigned_to, status, added_on, added_by, updated_on, updated_by, deleted]
 
+11.lease_management =>
 
+  [id, lease_id, property_id, customer_id, lease_start_date, lease_end_date, rent_amount, payment_frequency, added_on, added_by, updated_on, updated_by, deleted]
+
+12. payments =>
+
+[id, payment_id, customer_id, payment_date, payment_amount, payment_method, payment_status, added_on, added_by, updated_on, updated_by, deleted]
+
+13. vendors =>
+
+[id, vendor_id, vendor_name, contact_name, contact_email, contact_phone, address, city, state, country, added_on, added_by, updated_on, updated_by, deleted]
+
+vendor_products =>
+
+[id, vendor_product_id, vendor_id, product_name, product_description, price, quantity, added_on, added_by, updated_on, updated_by, deleted]
+
+14. visitors =>
+
+[id, visitor_id, visitor_name, visitor_type, customer_id, check_in_time, check_out_time, purpose, added_on, added_by, updated_on, updated_by, deleted]
+
+15. inventory =>
+
+[id, item_id, item_name, item_description, quantity, category, purchase_date, purchase_price, location, added_on, added_by, updated_on, updated_by, deleted]
+
+16. expenses =>
+
+[id, expense_id, customer_id, expense_date, expense_description, expense_amount, category, added_on, added_by, updated_on, updated_by, deleted]
+
+17. dashboard =>
+
+[id, customer_id, data, date, added_on, added_by, updated_on, updated_by, deleted]
+
+18. legal_compliance =>
+
+[id, compliance_id, customer_id, compliance_type, due_date, status, added_on, added_by, updated_on, updated_by, deleted]
+
+19. analytics =>
+
+[id, customer_id, data, date, added_on, added_by, updated_on, updated_by, deleted]
+
+20. tenant_portal =>
+
+[id, customer_id, username, password, added_on, added_by, updated_on, updated_by, deleted]
+
+21. tenant_screening =>
+
+[id, screening_id, customer_id, applicant_name, application_date, status, added_on, added_by, updated_on, updated_by, deleted]
+
+22. smart_home_devices =>
+
+[id, device_id, customer_id, device_name, device_type, status, added_on, added_by, updated_on, updated_by, deleted]
+
+23. marketing_campaigns =>
+
+[id, campaign_id, customer_id, campaign_name, campaign_type, start_date, end_date, description, status, added_on, added_by, updated_on, updated_by, deleted]
+
+24. energy_efficiency_data =>
+
+[id, customer_id, data, date, added_on, added_by, updated_on, updated_by, deleted]
+
+25. property_manager_app_data =>
+
+[id, customer_id, data, date, added_on, added_by, updated_on, updated_by, deleted]
 
 
 
