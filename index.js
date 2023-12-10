@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 // All Routes included
+
 const protectedRoute = require('./routes/protectedRoute'); // Adjust the path accordingly
 const adminRoute = require('./routes/adminRoute'); // Adjust the path accordingly
 const fileUploadRoute = require('./routes/fileUploadRoute'); // Adjust the path accordingly

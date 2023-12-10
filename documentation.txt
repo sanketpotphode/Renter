@@ -200,23 +200,23 @@ vendor_products =>
 |   |   ├── depositController.js
 |   |   ├── complaintController.js
 |   |   ├── noticePeriodController.js
-|   |   ├── maintenanceRequestController.js   // New
-|   |   ├── leaseController.js                // New
-|   |   ├── paymentController.js              // New
-|   |   ├── vendorController.js               // New
-|   |   ├── visitorController.js              // New
-|   |   ├── inventoryController.js            // New
-|   |   ├── expenseController.js              // New
-|   |   ├── dashboardController.js            // New
-|   |   ├── legalController.js                // New
-|   |   ├── analyticsController.js            // New
-|   |   ├── tenantPortalController.js         // New
-|   |   ├── tenantScreeningController.js      // New
-|   |   ├── smartHomeController.js            // New
-|   |   ├── marketingController.js            // New
-|   |   ├── energyEfficiencyController.js     // New
-|   |   ├── propertyManagerAppController.js   // New
-|   |   └── fileUploadController.js           // Existing
+|   |   ├── maintenanceRequestController.js   
+|   |   ├── leaseController.js                
+|   |   ├── paymentController.js              
+|   |   ├── vendorController.js               
+|   |   ├── visitorController.js              
+|   |   ├── inventoryController.js            
+|   |   ├── expenseController.js              
+|   |   ├── dashboardController.js            
+|   |   ├── legalController.js                
+|   |   ├── analyticsController.js            
+|   |   ├── tenantPortalController.js         
+|   |   ├── tenantScreeningController.js      
+|   |   ├── smartHomeController.js            
+|   |   ├── marketingController.js            
+|   |   ├── energyEfficiencyController.js     
+|   |   ├── propertyManagerAppController.js   
+|   |   └── fileUploadController.js           
 |   |
 |   ├── models/
 |   |   ├── customerModel.js
@@ -229,23 +229,23 @@ vendor_products =>
 |   |   ├── depositModel.js
 |   |   ├── complaintModel.js
 |   |   ├── noticePeriodModel.js
-|   |   ├── maintenanceRequestModel.js   // New
-|   |   ├── leaseModel.js                // New
-|   |   ├── paymentModel.js              // New
-|   |   ├── vendorModel.js               // New
-|   |   ├── visitorModel.js              // New
-|   |   ├── inventoryModel.js            // New
-|   |   ├── expenseModel.js              // New
-|   |   ├── dashboardModel.js            // New
-|   |   ├── legalModel.js                // New
-|   |   ├── analyticsModel.js            // New
-|   |   ├── tenantPortalModel.js         // New
-|   |   ├── tenantScreeningModel.js      // New
-|   |   ├── smartHomeModel.js            // New
-|   |   ├── marketingModel.js            // New
-|   |   ├── energyEfficiencyModel.js     // New
-|   |   ├── propertyManagerAppModel.js   // New
-|   |   └── fileUploadModel.js           // Existing
+|   |   ├── maintenanceRequestModel.js   
+|   |   ├── leaseModel.js                
+|   |   ├── paymentModel.js              
+|   |   ├── vendorModel.js               
+|   |   ├── visitorModel.js              
+|   |   ├── inventoryModel.js            
+|   |   ├── expenseModel.js              
+|   |   ├── dashboardModel.js            
+|   |   ├── legalModel.js                
+|   |   ├── analyticsModel.js            
+|   |   ├── tenantPortalModel.js         
+|   |   ├── tenantScreeningModel.js      
+|   |   ├── smartHomeModel.js            
+|   |   ├── marketingModel.js            
+|   |   ├── energyEfficiencyModel.js     
+|   |   ├── propertyManagerAppModel.js   
+|   |   └── fileUploadModel.js           
 |   |
 |   ├── routes/
 |   |   ├── customerRoutes.js
@@ -258,23 +258,23 @@ vendor_products =>
 |   |   ├── depositRoutes.js
 |   |   ├── complaintRoutes.js
 |   |   ├── noticePeriodRoutes.js
-|   |   ├── maintenanceRequestRoutes.js   // New
-|   |   ├── leaseRoutes.js                // New
-|   |   ├── paymentRoutes.js              // New
-|   |   ├── vendorRoutes.js               // New
-|   |   ├── visitorRoutes.js              // New
-|   |   ├── inventoryRoutes.js            // New
-|   |   ├── expenseRoutes.js              // New
-|   |   ├── dashboardRoutes.js            // New
-|   |   ├── legalRoutes.js                // New
-|   |   ├── analyticsRoutes.js            // New
-|   |   ├── tenantPortalRoutes.js         // New
-|   |   ├── tenantScreeningRoutes.js      // New
-|   |   ├── smartHomeRoutes.js            // New
-|   |   ├── marketingRoutes.js            // New
-|   |   ├── energyEfficiencyRoutes.js     // New
-|   |   ├── propertyManagerAppRoutes.js   // New
-|   |   └── fileUploadRoutes.js           // Existing
+|   |   ├── maintenanceRequestRoutes.js   
+|   |   ├── leaseRoutes.js                
+|   |   ├── paymentRoutes.js              
+|   |   ├── vendorRoutes.js               
+|   |   ├── visitorRoutes.js              
+|   |   ├── inventoryRoutes.js            
+|   |   ├── expenseRoutes.js              
+|   |   ├── dashboardRoutes.js            
+|   |   ├── legalRoutes.js                
+|   |   ├── analyticsRoutes.js            
+|   |   ├── tenantPortalRoutes.js         
+|   |   ├── tenantScreeningRoutes.js      
+|   |   ├── smartHomeRoutes.js            
+|   |   ├── marketingRoutes.js            
+|   |   ├── energyEfficiencyRoutes.js     
+|   |   ├── propertyManagerAppRoutes.js   
+|   |   └── fileUploadRoutes.js           
 |   |
 |   ├── config/
 |   |   ├── database.js
@@ -284,21 +284,21 @@ vendor_products =>
 |   |   ├── authenticationMiddleware.js
 |   |   ├── authorizationMiddleware.js
 |   |   ├── fileUploadMiddleware.js
-|   |   ├── maintenanceRequestMiddleware.js   // New
-|   |   ├── leaseMiddleware.js                // New
-|   |   ├── paymentMiddleware.js              // New
-|   |   ├── vendorMiddleware.js               // New
-|   |   ├── visitorMiddleware.js              // New
-|   |   ├── inventoryMiddleware.js            // New
-|   |   ├── expenseMiddleware.js              // New
-|   |   ├── dashboardMiddleware.js            // New
-|   |   ├── legalMiddleware.js                // New
-|   |   ├── analyticsMiddleware.js            // New
-|   |   ├── tenantPortalMiddleware.js         // New
-|   |   ├── tenantScreeningMiddleware.js      // New
-|   |   ├── smartHomeMiddleware.js            // New
-|   |   ├── marketingMiddleware.js            // New
-|   |   └── energyEfficiencyMiddleware.js     // New
+|   |   ├── maintenanceRequestMiddleware.js   
+|   |   ├── leaseMiddleware.js                
+|   |   ├── paymentMiddleware.js              
+|   |   ├── vendorMiddleware.js               
+|   |   ├── visitorMiddleware.js              
+|   |   ├── inventoryMiddleware.js            
+|   |   ├── expenseMiddleware.js              
+|   |   ├── dashboardMiddleware.js            
+|   |   ├── legalMiddleware.js                
+|   |   ├── analyticsMiddleware.js            
+|   |   ├── tenantPortalMiddleware.js         
+|   |   ├── tenantScreeningMiddleware.js      
+|   |   ├── smartHomeMiddleware.js            
+|   |   ├── marketingMiddleware.js            
+|   |   └── energyEfficiencyMiddleware.js     
 |   |
 |   ├── utils/
 |   |   ├── helperFunctions.js

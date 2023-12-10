@@ -1,23 +1,20 @@
-const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = process.env; // Secret key for JWT, loaded from environment variables
+// middleware/authenticationMiddleware.js
+const jwtService = require('../utils/jwtService');
 
-// Middleware to verify and authenticate a user with a JWT
 const authenticateUser = (req, res, next) => {
-  const token = req.header('x-auth-token'); // Extract the JWT token from the request header
+  const token = req.header('Authorization');
 
   if (!token) {
-    return res.status(401).json({ error: 'Access denied. No token provided.' });
+    return res.status(401).json({ error: 'Authentication failed. Token not provided.' });
   }
 
   try {
-    const decoded = jwt.verify(token, SECRET_KEY); // Verify and decode the token
-    req.user = decoded; // Attach the user information to the request
-    next(); // Proceed to the next middleware or route
+    const decoded = jwtService.verifyToken(token);
+    req.user = decoded.user;
+    next();
   } catch (error) {
-    res.status(401).json({ error: 'Invalid token.' });
+    return res.status(401).json({ error: 'Authentication failed. Invalid token.' });
   }
 };
 
-module.exports = {
-  authenticateUser,
-};
+module.exports = { authenticateUser };
