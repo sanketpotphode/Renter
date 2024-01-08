@@ -26,6 +26,7 @@ const getUserById = (userId) => {
   });
 };
 
+
 // Model function to add a new user
 const addUser = (userData) => {
   return new Promise((resolve, reject) => {
@@ -65,6 +66,32 @@ const deleteUser = (userId) => {
   });
 };
 
+// Model function for user login
+const loginUser = (username, password) => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM user_details WHERE username = ? AND password = ? AND status = 1', [username, password], (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results[0]);
+      }
+    });
+  });
+};
+
+// Model function for user registration
+const registerUser = (userData) => {
+  return new Promise((resolve, reject) => {
+    db.query('INSERT INTO user_details SET ?', userData, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+};
+
 // Export the model functions
 module.exports = {
   getAllUsers,
@@ -72,4 +99,6 @@ module.exports = {
   addUser,
   updateUser,
   deleteUser,
+  loginUser,
+  registerUser,
 };

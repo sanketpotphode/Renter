@@ -1,20 +1,30 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const authenticationMiddleware = require('../middleware/authenticationMiddleware');
 
-// API to get all users
+// Public API to register a new user
+router.post('/register', userController.registerUser);
+
+// Public API for user login
+router.post('/login', userController.loginUser);
+
+// // Protected routes below this line require authentication
+// router.use(authenticationMiddleware.authenticateUser);
+
+// Protected API to get all users
 router.get('/users', userController.getAllUsers);
 
-// API to get user details by user id
+// Protected API to get a user by user id
 router.get('/user/:id', userController.getUserById);
 
-// API for adding a new user
+// Protected API to add a new user
 router.post('/addUser', userController.addUser);
 
-// API for updating user details
+// Protected API to update user details
 router.put('/updateUser/:id', userController.updateUser);
 
-// API to mark a user as inactive
+// Protected API to delete users by updating status
 router.put('/deleteUser/:id', userController.deleteUser);
 
 module.exports = router;

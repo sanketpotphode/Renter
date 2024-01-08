@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const customerController = require('../controllers/customerController');
+const authenticationMiddleware = require('../middleware/authenticationMiddleware');
+
+// Secure all customer routes with authentication middleware
+router.use(authenticationMiddleware.authenticateUser);
 
 // API to get all customers details
 router.get('/customers', customerController.getAllCustomers);
 
 // API to get customer details by customer id
-router.get('/customer/:id', customerController.getCustomerById);
+router.get('/customer/:id', customerController.getCustomerById);    
 
 // API for add new customer details
 router.post('/addCustomer', customerController.addCustomer);
